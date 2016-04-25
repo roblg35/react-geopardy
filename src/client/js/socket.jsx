@@ -1,30 +1,34 @@
 var React  = require('react'),
 	Socket = require('react-socket').Socket;
+	SocketEvent = require('react-socket').Event;
+
  
 module.exports = module.exports = React.createClass({
 	render: function () {
  
 		return (
 			<div>
-				<Socket url="http://localhost:3000"/>
+				<p>Sockets!</p>
+				<Socket url="http://localhost:3000/socket.io/socket.io.js"/>
 			</div>
 		);
 	}
 });
 
-	SocketEvent = require('react-socket').Event;
  
-module.exports = module.exports = React.createClass({
-	onSocketMessage: function (message) {
+// module.exports = module.exports = React.createClass({
+// 	onSocketMessage: function (message) {
  
-		...
-	},
-	render: function () {
+// 		return 'on socket message'
+// 	},
+// 	render: function () {
  
-		return (
-			<div>
-				<SocketEvent name="your-socket-event" callback={ this.onSocketMessage }/>
-			</div>
-		);
-	}
-});
+// 		return (
+// 			<div>
+// 				<SocketEvent name="your-socket-event" callback={ this.onSocketMessage }/>
+// 			</div>
+// 		);
+// 	}
+// });
+
+
