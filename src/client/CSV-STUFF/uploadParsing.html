@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+<section>
+<form class="form-horizontal" action="/admin/{{schoolId}}/addstudents/parse" method="post">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" id="ignoreHeaders" name="ignoreHeaders" value="true">First row contains column names
+    </label>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      {% for column in columns %}
+        <td>
+          <select class="form-control" name="{{column}}">
+            <option value="" selected>Ignore</option>
+            <option value="firstname">First Name</option>
+            <option value="middlename">Middle Name</option>
+            <option value="lastname">Last Name</option>
+            <option value="studentid">Student ID</option>
+            <option value="grade">Grade</option>
+          </select>
+        </td>
+      {% endfor %}
+    </tr>
+    {% for line in lines %}
+    <tr>
+      {% for column in line %}
+        <td>
+          {{column}}
+        </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  <button type="submit" class="btn btn-md btn-success">GO</button>
+</form>
+</section>
