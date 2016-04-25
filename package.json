@@ -11,7 +11,9 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "morgan": "~1.6.1",
+    "react-socket": "^0.1.4",
     "serve-favicon": "~2.3.0",
+    "socket.io": "^1.4.5",
     "swig": "^1.4.2"
   },
   "devDependencies": {
