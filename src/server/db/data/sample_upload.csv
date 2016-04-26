@@ -1,5 +1,5 @@
 "points","question","answer","daily_double","category"
-1,What's the keyboard shortcut for opening up Spotlight on your computer?","⌘ + Spacebar",false,"Workflow & Git"
+1,"What's the keyboard shortcut for opening up Spotlight on your computer?","⌘ + Spacebar",false,"Workflow & Git"
 2,"What's the shortcut for opening the Chrome Dev Tools?","⌘ + Option + I",false,"Workflow & Git"
 3,"How do you see all the remote repositories in a project with git?","git remote -v",false,"Workflow & Git"
 4,"You've run 'git commit' and forgotten a message and suddenly you're in VIM! How do you exit?",":wq or :x",false,"Workflow & Git"
