@@ -7,7 +7,6 @@ exports.up = function(knex, Promise) {
     table.boolean('admin');
     table.integer('score');
   });
-
 };
 
 exports.down = function(knex, Promise) {
