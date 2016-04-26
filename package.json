@@ -6,6 +6,7 @@
     "start": "node ./src/server/bin/www"
   },
   "dependencies": {
+    "axios": "^0.10.0",
     "body-parser": "~1.13.2",
     "bourbon": "^4.2.7",
     "bourbon-neat": "^1.7.4",
@@ -16,10 +17,14 @@
     "knex": "^0.10.0",
     "knex-csv-seeder": "^0.3.4",
     "morgan": "~1.6.1",
-    "react-socket": "^0.1.4",
     "pg": "^4.5.3",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
+    "react-promise": "^1.1.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.3.0",
+    "react-socket": "^0.1.4",
+    "redux": "^3.5.2",
     "sass": "^0.5.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.4.5",

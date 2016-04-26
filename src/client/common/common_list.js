@@ -1,0 +1,1 @@
+// example of a component(dumb component) that will be used by the container

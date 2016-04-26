@@ -1,0 +1,1 @@
+//this is where the actions for this component will take place, such as calling to the API to get the info we need.
