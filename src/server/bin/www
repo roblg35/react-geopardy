@@ -21,6 +21,20 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var io = require('socket.io').listen(server);
+
+// this function fires every time conection is made between client and server
+io.sockets.on('connection', function(socket) {
+  console.log('connection established Mo Freaker')
+
+//whenever client emits or sends a message with the name 'send' this function will fire
+  socket.on('send', function(data){
+    console.log(data)
+    //io.sockets.emit sends message to all connected sockets in all rooms
+    io.sockets.emit('receive', data)
+  })
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */

@@ -17,5 +17,4 @@ router.get('/questions', function(req, res, next) {
     res.json(questions);
   });
 });
-
 module.exports = router;

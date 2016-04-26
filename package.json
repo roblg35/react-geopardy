@@ -16,11 +16,13 @@
     "knex": "^0.10.0",
     "knex-csv-seeder": "^0.3.4",
     "morgan": "~1.6.1",
+    "react-socket": "^0.1.4",
     "pg": "^4.5.3",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "sass": "^0.5.0",
     "serve-favicon": "~2.3.0",
+    "socket.io": "^1.4.5",
     "swig": "^1.4.2"
   },
   "devDependencies": {
