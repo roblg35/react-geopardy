@@ -65,15 +65,15 @@ module.exports = {
   /**** CREATE ****/
 
   //Adds a new game
-  addGame: function (game) {
+  addGame: function (url) {
     return knex('games')
-    .insert(game, 'id');
+    .insert({url: url}, 'id');
   },
 
   //Adds a new user, returns an array containing the user's id
   addUser: function (user) {
     return knex('users')
-    .insert(user, 'id');
+    .insert({name: user.name, admin: user.admin, game_id: user.game_id}, 'game_id').returning('*');
   },
 
   //Takes an array of question(s) and inserts them into db, returns an array of question id's
@@ -96,6 +96,3 @@ module.exports = {
     .update(question, 'id');
   }
 };
-
-
-

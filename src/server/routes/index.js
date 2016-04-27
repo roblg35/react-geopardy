@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var queries = require('../db/queries/queries');
+var Authorization = require('./auth');
 
 //**** Get Routes ****/
 
@@ -65,17 +66,36 @@ router.get('/questions/:questionID', function(req, res, next) {
 
 //Posts a new game, returns an array containing the id of the new game
 router.post('/games', function(req, res, next) {
-  queries.addGame(req.body)
-  .then(function(game) {
-    res.json(game);
+
+  var gameInfo = req.body.username;
+
+  var userInfo = {
+    name: gameInfo,
+    admin: true
+  }
+
+  queries.addGame(gameInfo)
+  .then(function(gameID) {
+    userInfo.game_id = Number(gameID);
+    queries.addUser(userInfo)
+    .then(function(data) {
+      res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id), admin: data[0].admin });
+    });
   });
 });
 
 //Adds a new user, returns an array containing the id of the new user
 router.post('/users', function(req, res, next) {
-  queries.addUser(req.body)
-  .then(function(user) {
-    res.json(user);
+
+  var userInfo = {
+      name: req.body.username,
+      game_id: req.body.gameID
+  }
+
+  queries.addUser(userInfo)
+  .then(function(data) {
+    console.log(data);
+    res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id) });
   });
 });
 
