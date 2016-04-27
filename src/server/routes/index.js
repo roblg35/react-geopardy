@@ -21,6 +21,14 @@ router.get('/:gameID/questions', function(req, res, next) {
   });
 });
 
+//Returns an array of all categories for a given game
+router.get('/:gameID/categories', function(req, res, next) {
+  queries.Categories(req.params.gameID)
+  .then(function(categories) {
+    res.json(categories);
+  });
+});
+
 //Returns an array of all questions for a given game
 router.get('/:gameID/questions', function(req, res, next) {
   queries.Questions(req.params.gameID)
@@ -71,7 +79,15 @@ router.post('/users', function(req, res, next) {
   });
 });
 
-//Takes an array of question(s) and inserts them into db, returns an array of question id's
+//Takes an array of categories and inserts them into db, returns an array of the question id's
+router.post('/categories', function(req, res, next) {
+  queries.addCategories(req.body)
+  .then(function(categories) {
+    res.json(categories);
+  });
+});
+
+//Takes an array of question(s) and inserts them into db, returns an array of the question id's
 router.post('/questions', function(req, res, next) {
   queries.addQuestions(req.body)
   .then(function(questions) {
@@ -85,6 +101,7 @@ router.post('/questions', function(req, res, next) {
 router.post('/questions/:questionID', function(req, res, next) {
   queries.editQuestion(req.params.questionID, req.body)
   .then(function(question) {
+
     res.json(question);
   });
 });

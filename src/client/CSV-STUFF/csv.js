@@ -16,7 +16,7 @@ function studentCsvParser(req, res, next) {
   var lastNameColumn = -1;
   var studentIdNameColumn = -1;
   var gradeColumn = -1;
-  for (var key in formKeys) {;
+  for (var key in formKeys) {
     if (!isNaN(key)) {
       switch (req.body[key]) {
         case 'firstname': {
