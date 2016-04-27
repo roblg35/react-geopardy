@@ -97,7 +97,7 @@ router.post('/users', function(req, res, next) {
     console.log(data);
     res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id) });
   });
-}
+});
 
 //Takes an array of categories and inserts them into db, returns an array of the question id's
 router.post('/categories', function(req, res, next) {
