@@ -86,9 +86,16 @@ router.post('/games', function(req, res, next) {
 
 //Adds a new user, returns an array containing the id of the new user
 router.post('/users', function(req, res, next) {
-  queries.addUser(req.body)
-  .then(function(user) {
-    res.json(user);
+
+  var userInfo = {
+      name: req.body.username,
+      game_id: req.body.gameID
+  }
+
+  queries.addUser(userInfo)
+  .then(function(data) {
+    console.log(data);
+    res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id));
   });
 });
 
