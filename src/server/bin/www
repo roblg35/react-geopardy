@@ -25,13 +25,12 @@ var io = require('socket.io').listen(server);
 
 // this function fires every time conection is made between client and server
 io.sockets.on('connection', function(socket) {
-  console.log('connection established Mo Freaker')
+  socket.emit('receive', 'Hey friends.')
 
 //whenever client emits or sends a message with the name 'send' this function will fire
   socket.on('send', function(data){
-    console.log(data)
-    //io.sockets.emit sends message to all connected sockets in all rooms
-    io.sockets.emit('receive', data)
+    console.log('data', data)
+    socket.emit('receive', 'I got your data: ' + JSON.stringify(data));
   })
 });
 
