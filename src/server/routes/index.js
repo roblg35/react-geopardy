@@ -8,6 +8,11 @@ var csv_data_parser = require('./csv_data_parser');
 
 //**** Get Routes ****/
 
+// router.get('/ping', function(req, res, next){
+//   res.json({test: 22})
+// })
+
+
 //Returns an array of all games in the db
 router.get('/games', function(req, res, next) {
   queries.Games()
@@ -155,6 +160,7 @@ router.post('/questions/:questionID', function(req, res, next) {
     res.json(question);
   });
 });
+
 
 
 module.exports = router;
