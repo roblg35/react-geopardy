@@ -63,20 +63,6 @@ router.get('/questions/:questionID', function(req, res, next) {
 
 /**** Post Routes ****/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Posts a new game, returns an array containing the id of the new game
 router.post('/games', function(req, res, next) {
 
@@ -97,18 +83,6 @@ router.post('/games', function(req, res, next) {
     })
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Adds a new user, returns an array containing the id of the new user
 router.post('/users', function(req, res, next) {
