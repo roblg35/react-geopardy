@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var queries = require('../db/queries/queries');
+var Authorization = require('./auth');
 
 //**** Get Routes ****/
 
@@ -78,8 +79,8 @@ router.post('/games', function(req, res, next) {
     userInfo.game_id = Number(gameID);
     queries.addUser(userInfo)
     .then(function(gameID2) {
-      console.log(gameID2);
-      res.json(gameID2);
+      console.log({ game_id: gameID2, token: Authorization.tokenForUser(gameID2[0]) });
+      res.json({ game_id: gameID2, token: Authorization.tokenForUser(gameID2[0]) });
     })
   });
 });
