@@ -7,7 +7,6 @@ exports.seed = function(knex, Promise) {
     // Inserts seed entries
     knex('games').insert(
       {
-        id: 1,
         url: 'http://localhost:5000/'
       })
     );

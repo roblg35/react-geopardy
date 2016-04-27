@@ -83,7 +83,8 @@ module.exports = {
   },
   //Takes an array of categories and inserts them into db, returns an array of category id's
   addCategories: function (categories) {
-
+    return knex('categories')
+    .insert(categories, '*');
   },
 
   /**** UPDATE ****/
