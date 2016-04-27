@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var queries = require('../db/queries/queries');
+var Authorization = require('./auth');
 
 //**** Get Routes ****/
 
@@ -77,20 +78,26 @@ router.post('/games', function(req, res, next) {
   .then(function(gameID) {
     userInfo.game_id = Number(gameID);
     queries.addUser(userInfo)
-    .then(function(gameID2) {
-      console.log(gameID2);
-      res.json(gameID2);
-    })
+    .then(function(data) {
+      res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id), admin: data[0].admin });
+    });
   });
 });
 
 //Adds a new user, returns an array containing the id of the new user
 router.post('/users', function(req, res, next) {
-  queries.addUser(req.body)
-  .then(function(user) {
-    res.json(user);
+
+  var userInfo = {
+      name: req.body.username,
+      game_id: req.body.gameID
+  }
+
+  queries.addUser(userInfo)
+  .then(function(data) {
+    console.log(data);
+    res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id) });
   });
-});
+}
 
 //Takes an array of categories and inserts them into db, returns an array of the question id's
 router.post('/categories', function(req, res, next) {
