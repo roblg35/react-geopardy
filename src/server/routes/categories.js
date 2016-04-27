@@ -15,11 +15,4 @@ router.get('/:gameID/questions2', function(req, res, next) {
   });
 });
 
-router.post('/games', function(req, res, next) {
-  queries.addGame(req.body.url)
-  .then(function(game) {
-
-  });
-});
-
 module.exports = router;

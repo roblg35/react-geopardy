@@ -3,6 +3,7 @@ var router = express.Router();
 var pg = require('pg');
 var queries = require('../db/queries/queries');
 var Authorization = require('./auth');
+var csv_data_parser = require('./csv_data_parser');
 
 //**** Get Routes ****/
 
@@ -72,7 +73,7 @@ router.post('/games', function(req, res, next) {
   var userInfo = {
     name: gameInfo,
     admin: true
-  }
+  };
 
   queries.addGame(gameInfo)
   .then(function(gameID) {
@@ -90,7 +91,7 @@ router.post('/users', function(req, res, next) {
   var userInfo = {
       name: req.body.username,
       game_id: req.body.gameID
-  }
+  };
 
   queries.addUser(userInfo)
   .then(function(data) {
@@ -112,6 +113,22 @@ router.post('/questions', function(req, res, next) {
   queries.addQuestions(req.body)
   .then(function(questions) {
     res.json(questions);
+  });
+});
+
+router.post('/file', function(req, res, next) {
+
+  var categories = csv_data_parser.findCategories(req.body.data, req.body.game_id);
+  queries.addCategories(categories)
+  .then(function(categoryObjs) {
+
+  var questions = csv_data_parser.makeQuestions(req.body.data, categoryObjs, req.body.game_id);
+
+    queries.addQuestions(questions)
+    .then(function (questionIDs) {
+      console.log(questionIDs);
+      res.json({ message: "success"});
+    });
   });
 });
 
