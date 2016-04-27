@@ -8,4 +8,4 @@ module.exports = {
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: id, iat: timestamp }, config.secret);
   }
-}
+};

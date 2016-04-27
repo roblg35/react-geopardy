@@ -38,7 +38,7 @@ var paths = {
 };
 
 var nodemonConfig = {
-  script: paths.server,
+  script: paths.server[0],
   ext: 'html js css',
   ignore: ['node_modules']
 };

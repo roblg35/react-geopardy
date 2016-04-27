@@ -4,8 +4,8 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('name');
     table.integer('game_id').references('id').inTable('games').onDelete('CASCADE');
-    table.boolean('admin');
-    table.integer('score');
+    table.boolean('admin').defaultTo(false);
+    table.integer('score').defaultTo(0);
   });
 };
 
