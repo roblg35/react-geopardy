@@ -73,7 +73,7 @@ module.exports = {
   //Adds a new user, returns an array containing the user's id
   addUser: function (user) {
     return knex('users')
-    .insert({name: user.name, admin: user.admin, game_id: user.game_id}, 'game_id');
+    .insert({name: user.name, admin: user.admin, game_id: user.game_id}, 'game_id').returning('*');
   },
 
   //Takes an array of question(s) and inserts them into db, returns an array of question id's
@@ -95,6 +95,3 @@ module.exports = {
     .update(question, 'id');
   }
 };
-
-
-

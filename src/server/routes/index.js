@@ -78,10 +78,9 @@ router.post('/games', function(req, res, next) {
   .then(function(gameID) {
     userInfo.game_id = Number(gameID);
     queries.addUser(userInfo)
-    .then(function(gameID2) {
-      console.log({ game_id: gameID2, token: Authorization.tokenForUser(gameID2[0]) });
-      res.json({ game_id: gameID2, token: Authorization.tokenForUser(gameID2[0]) });
-    })
+    .then(function(data) {
+      res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id), admin: data[0].admin });
+    });
   });
 });
 
