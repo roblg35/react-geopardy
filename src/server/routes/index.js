@@ -63,13 +63,52 @@ router.get('/questions/:questionID', function(req, res, next) {
 
 /**** Post Routes ****/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Posts a new game, returns an array containing the id of the new game
 router.post('/games', function(req, res, next) {
-  queries.addGame(req.body)
-  .then(function(game) {
-    res.json(game);
+
+  var gameInfo = req.body.username;
+
+  var userInfo = {
+    name: gameInfo,
+    admin: true
+  }
+
+  queries.addGame(gameInfo)
+  .then(function(gameID) {
+    userInfo.game_id = Number(gameID);
+    queries.addUser(userInfo)
+    .then(function(gameID2) {
+      console.log(gameID2);
+      res.json(gameID2);
+    })
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Adds a new user, returns an array containing the id of the new user
 router.post('/users', function(req, res, next) {
