@@ -9,6 +9,16 @@ module.exports = {
     return knex('games');
   },
 
+  //Returns all categories for a given game
+  Categories: function (gameID) {
+    return knex
+    .select('*')
+    .from('categories')
+    .where({
+        game_id: gameID
+    });
+  },
+
   //Returns all questions in a given game,
   //joined with category names
   Questions: function (gameID) {
@@ -70,6 +80,10 @@ module.exports = {
   addQuestions: function (questions) {
     return knex('questions')
     .insert(questions, 'id');
+  },
+  //Takes an array of categories and inserts them into db, returns an array of category id's
+  addCategories: function (categories) {
+
   },
 
   /**** UPDATE ****/
