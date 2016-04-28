@@ -94,5 +94,21 @@ module.exports = {
     return knex('questions')
     .where('id', id)
     .update(question, 'id');
+  },
+
+  //Updates a single user, returns the user object updated
+  editUser: function (user, id) {
+    return knex('users')
+    .where('id', id)
+    .update(user, '*');
+  },
+
+  //Clears out all user current answers for a given game
+  clearCurrentAnswers: function (gameID) {
+    return knex('users')
+    .returning('*')
+    .where('game_id', gameID)
+    .update('current_answer', 'No Answer!');
   }
+
 };

@@ -172,6 +172,22 @@ router.post('/questions/:questionID', function(req, res, next) {
   });
 });
 
+//Updates a given user
+router.post('/users/:userID', function(req, res, next) {
+  queries.editUser(req.body, req.params.userID)
+  .then(function(user) {
+    res.json(user);
+  });
+});
+
+//Clears current_answers for all users in a given game
+router.post('/:gameID/users/clearanswers', function(req, res, next) {
+  queries.clearCurrentAnswers(req.params.gameID)
+  .then(function(users) {
+    res.json(users);
+  });
+});
+
 
 
 module.exports = router;
