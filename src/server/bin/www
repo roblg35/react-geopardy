@@ -20,17 +20,17 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+// var express = require('express');
+// var router = express.Router();
 var io = require('socket.io').listen(server);
 
 // this function fires every time conection is made between client and server
 io.sockets.on('connection', function(socket) {
-  socket.emit('receive', 'Hey friends.')
+  socket.emit('admin', 'Socket Connected')
 
 //whenever client emits or sends a message with the name 'send' this function will fire
   socket.on('send', function(data){
-    console.log('data', data)
-    socket.emit('receive', 'I got your data: ' + JSON.stringify(data));
+    socket.emit('receive', 'I got your data: ' + (data));
   })
 });
 
