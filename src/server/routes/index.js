@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var queries = require('../db/queries/queries');
+var queries2 = require('../db/queries/categoryQuery');
 var Authorization = require('./auth');
 var csv_data_parser = require('./csv_data_parser');
 var multer = require('multer')();
@@ -9,11 +10,28 @@ var csv = require("fast-csv");
 
 //**** Get Routes ****/
 
+// router.get('/ping', function(req, res, next){
+//   res.json({test: 22})
+// })
+
+
 //Returns an array of all games in the db
 router.get('/games', function(req, res, next) {
   queries.Games()
   .then(function(games) {
     res.json(games);
+  });
+});
+
+
+//Returns an array of all questions and array of all categories for a given game
+router.get('/:gameID/questions2', function(req, res, next) {
+  queries2.Categories(req.params.gameID)
+  .then(function (categories) {
+    queries.Questions(req.params.gameID)
+    .then(function (questions) {
+      res.json({ categories: categories, questions: questions });
+    });
   });
 });
 
@@ -153,6 +171,7 @@ router.post('/questions/:questionID', function(req, res, next) {
     res.json(question);
   });
 });
+
 
 
 module.exports = router;
