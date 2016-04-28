@@ -5,6 +5,8 @@ var queries = require('../db/queries/queries');
 var queries2 = require('../db/queries/categoryQuery');
 var Authorization = require('./auth');
 var csv_data_parser = require('./csv_data_parser');
+var multer = require('multer')();
+var csv = require("fast-csv");
 
 //**** Get Routes ****/
 
@@ -134,18 +136,27 @@ router.post('/questions', function(req, res, next) {
   });
 });
 
-router.post('/file', function(req, res, next) {
+router.post('/file', multer.single('file'), function(req, res, next) {
 
-  var categories = csv_data_parser.findCategories(req.body.data, req.body.game_id);
-  queries.addCategories(categories)
-  .then(function(categoryObjs) {
+    var game_id = req.body.game_id;
+    var array = [];
+    var contents = req.file.buffer.toString('utf-8');
+    csv
+    .fromString(contents)
+    .on("data", function(data){
+       array.push(data);
+    })
+    .on("end", function(){
+        var categories = csv_data_parser.findCategories(array, game_id);
+        queries.addCategories(categories)
+        .then(function(categoryObjs) {
 
-  var questions = csv_data_parser.makeQuestions(req.body.data, categoryObjs, req.body.game_id);
+        var questions = csv_data_parser.makeQuestions(array, categoryObjs,game_id);
 
-    queries.addQuestions(questions)
-    .then(function (questionIDs) {
-      console.log(questionIDs);
-      res.json({ message: "success"});
+        queries.addQuestions(questions)
+        .then(function (questionIDs) {
+          res.json({ message: "success"});
+        });
     });
   });
 });
