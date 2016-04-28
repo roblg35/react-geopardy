@@ -1,7 +1,4 @@
-var $ = jQuery = require('jquery');
-require('./jquery.csv.js');
-var FileReader = require('filereader');
-//var csv = require()
+
 
 module.exports = {
 

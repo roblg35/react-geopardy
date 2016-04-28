@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('game_id').references('id').inTable('games').onDelete('CASCADE');
     table.boolean('admin').defaultTo(false);
     table.integer('score').defaultTo(0);
+    table.text('current_answer').defaultTo("No answer!");
   });
 };
 
