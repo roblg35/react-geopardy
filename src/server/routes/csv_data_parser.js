@@ -1,11 +1,24 @@
+var $ = jQuery = require('jquery');
+require('./jquery.csv.js');
+var FileReader = require('filereader');
+//var csv = require()
+
 module.exports = {
 
   //This function creates an array of category objects to be posted to the db
   findCategories: function (data, gameID) {
 
+    //create a new array to avoid destructing data
+    var newData = data.map(function(el){
+        return el;
+    });
+
+    //Remove first el that is just col names
+    newData.shift();
+
     var categories = [];
 
-    data.forEach(function (el) {
+    newData.forEach(function (el) {
         if(!categories.includes(el[4]))
           categories.push(el[4]);
     });
@@ -19,6 +32,7 @@ module.exports = {
   },
   //This function prepares an array of questions for the db
   makeQuestions: function (data, categoryObjs, gameID) {
+
 
         var questions = [];
 
