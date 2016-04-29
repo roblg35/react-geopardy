@@ -116,7 +116,7 @@ router.post('/users', function(req, res, next) {
   queries.addUser(userInfo)
   .then(function(data) {
     console.log(data);
-    res.json({ game_id: data[0].game_id, token: Authorization.tokenForUser(data[0].id) });
+    res.json({ game_id: data[0].game_id, teamID: data[0].id, token: Authorization.tokenForUser(data[0].id) });
   });
 });
 
